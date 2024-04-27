@@ -1,21 +1,23 @@
+const elements = {
+  cityInput: document.getElementById('city-input'),
+  weatherImg: document.getElementById('weather-img'),
+  temperature: document.getElementById('temperature'),
+  weatherDscr: document.getElementById('weather-dscr'),
+  locationElement: document.getElementById('location'),
+  dateElement: document.getElementById('date'),
+  timeElement: document.getElementById('time'),
+  windSpeedElement: document.getElementById('wind-speed'),
+  windDegElement: document.getElementById('wind-deg'),
+  humidityElement: document.getElementById('humidity'),
+  feelElement: document.getElementById('feel'),
+  pressureElement: document.getElementById('pressure'),
+  temMinElement: document.getElementById('temp-min'),
+  temMaxElement: document.getElementById('temp-max'),
+  visibilityElement: document.getElementById('visibility'),
+  sunriseElement: document.getElementById('sunrise'),
+  sunsetElement: document.getElementById('sunset'),
+};
 const search = document.getElementById('search-btn');
-const cityInput = document.getElementById('city-input');
-const weatherImg = document.getElementById('weather-img');
-const temperature = document.getElementById('temperature');
-const weatherDscr = document.getElementById('weather-dscr');
-const locationElement = document.getElementById('location');
-const dateElement = document.getElementById('date');
-const timeElement = document.getElementById('time');
-const windSpeedElement = document.getElementById('wind-speed');
-const windDegElement = document.getElementById('wind-deg');
-const humidityElement = document.getElementById('humidity');
-const feelElement = document.getElementById('feel');
-const pressureElement = document.getElementById('pressure');
-const temMinElement = document.getElementById('temp-min');
-const temMaxElement = document.getElementById('temp-max');
-const visibilityElement = document.getElementById('visibility');
-const sunriseElement = document.getElementById('sunrise');
-const sunsetElement = document.getElementById('sunset');
 var cityName = 'Jakarta';
 
 async function callApi(cityName) {
@@ -32,8 +34,6 @@ async function callApi(cityName) {
 
     const weatherData = await weatherResponse.json();
     const forecastData = await forecastResponse.json();
-
-    console.table(weatherData.sys);
 
     displayWeather(weatherData);
   } catch (error) {
@@ -89,55 +89,43 @@ const displayWeather = (weatherData) => {
   const pressure = weatherData.main.pressure + ' hPa';
   const temMin = Math.round(weatherData.main.temp_min) + '°C';
   const temMax = Math.round(weatherData.main.temp_max) + '°C';
-  const visibility = weatherData.visibility + '   km';
+  const visibility = weatherData.visibility + '   m';
   const sunriseCode = weatherData.sys.sunrise;
   const sunsetCode = weatherData.sys.sunset;
   const sunrise = new Date(sunriseCode * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   const sunset = new Date(sunsetCode * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-  console.log(windDeg);
-
-  document.getElementById('weather-img').src = iconUrl;
-  document.getElementById('temperature').innerText += `${temp}°C`;
-  document.getElementById('weather-dscr').innerText += capitalizeFirstLetter(description);
-  document.getElementById('location').innerText += capitalizeFirstLetter(weatherData.name);
-  document.getElementById('date').innerText += currentTime;
-  document.getElementById('time').innerText += currentDate;
-  document.getElementById('wind-speed').innerText += windSpeed;
-  document.getElementById('wind-deg').innerText += windDeg;
-  document.getElementById('humidity').innerText += humidity;
-  document.getElementById('feel').innerText += feel;
-  document.getElementById('pressure').innerText += pressure;
-  document.getElementById('temp-min').innerText += temMin;
-  document.getElementById('temp-max').innerText += temMax;
-  document.getElementById('visibility').innerText += visibility;
-  document.getElementById('sunrise').innerText += sunrise;
-  document.getElementById('sunset').innerText += sunset;
+  elements.weatherImg.src = iconUrl;
+  elements.temperature.innerText += `${temp}°C`;
+  elements.weatherDscr.innerText += capitalizeFirstLetter(description);
+  elements.locationElement.innerText += capitalizeFirstLetter(weatherData.name);
+  elements.dateElement.innerText += currentTime;
+  elements.timeElement.innerText += currentDate;
+  elements.windSpeedElement.innerText += windSpeed;
+  elements.windDegElement.innerText += windDeg;
+  elements.humidityElement.innerText += humidity;
+  elements.feelElement.innerText += feel;
+  elements.pressureElement.innerText += pressure;
+  elements.temMinElement.innerText += temMin;
+  elements.temMaxElement.innerText += temMax;
+  elements.visibilityElement.innerText += visibility;
+  elements.sunriseElement.innerText += sunrise;
+  elements.sunsetElement.innerText += sunset;
 };
 
 search.addEventListener('click', (e) => {
   e.preventDefault();
-  cityName = cityInput.value !== '' ? cityInput.value : 'Jakarta';
+  cityName = elements.cityInput.value !== '' ? elements.cityInput.value : 'Jakarta';
   resetUI();
   callApi(cityName);
 });
 
 const resetUI = () => {
-  weatherImg.src = '';
-  temperature.innerText = '';
-  weatherDscr.innerText = '';
-  locationElement.innerText = '';
-  dateElement.innerText = '';
-  timeElement.innerText = '';
-  windSpeedElement.innerText = '';
-  windDegElement.innerText = '';
-  humidityElement.innerText = '';
-  feelElement.innerText = '';
-  pressureElement.innerText = '';
-  temMinElement.innerText = '';
-  temMaxElement.innerText = '';
-  sunriseElement.innerText = '';
-  sunsetElement.innerText = '';
+  for (const key in elements) {
+    if (Object.hasOwnProperty.call(elements, key)) {
+      elements[key].innerText = '';
+    }
+  }
 };
 
 callApi(cityName);

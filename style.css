@@ -3,12 +3,19 @@ main {
   padding: 0;
   width: 100%;
   background-color: white;
+  transition: transform ease-in-out 0.3s;
 }
 
 #wrapper {
-  border: 1px solid red;
-  min-height: 90vh;
   width: 100%;
+  height: 90vhv;
+}
+
+#container {
+  height: auto;
+  margin: 6px;
+  padding: 1.2em;
+  height: fit-content;
 }
 
 #empty {
@@ -17,15 +24,17 @@ main {
   display: none;
 }
 
-#box1 {
-  margin: 6px;
-  padding: 1.2em;
+#box2 {
+  gap: 8px;
 }
 
 #main-info {
-  /* border: 1px solid red; */
   background-color: white;
 }
+/* 
+#detail-info {
+
+} */
 
 .card {
   width: 8rem;
@@ -38,11 +47,19 @@ main {
   box-shadow: 0px 10px 5px rgb(168, 168, 168);
 }
 
+#wind-deg {
+  font-size: small;
+}
+
 .nav-link:active {
   border-bottom: 2px solid black;
 }
 
 @media only screen and (min-width: 769px) {
+  #box2 {
+    gap: 2.5rem;
+  }
+
   .card {
     width: 12rem;
     height: 7rem;
