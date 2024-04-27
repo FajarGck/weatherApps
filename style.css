@@ -1,0 +1,59 @@
+main {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: white;
+}
+
+#wrapper {
+  border: 1px solid red;
+  min-height: 90vh;
+  width: 100%;
+}
+
+#empty {
+  font-weight: bolder;
+  margin: 10% auto;
+  display: none;
+}
+
+#box1 {
+  margin: 6px;
+  padding: 1.2em;
+}
+
+#main-info {
+  /* border: 1px solid red; */
+  background-color: white;
+}
+
+.card {
+  width: 8rem;
+  height: 9rem;
+  transition: transform, ease-in-out 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 5px rgb(168, 168, 168);
+}
+
+.nav-link:active {
+  border-bottom: 2px solid black;
+}
+
+@media only screen and (min-width: 769px) {
+  .card {
+    width: 12rem;
+    height: 7rem;
+  }
+}
+
+/* 
+#detail-info {
+  border: 1px solid red;
+} */
+/* 
+img {
+  border: 1px solid red;
+} */
