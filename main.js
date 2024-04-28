@@ -29,7 +29,7 @@ async function callApi(cityName) {
     const weatherResponse = await fetch(weatherUrl);
     const forecastResponse = await fetch(foreCastUrl);
     if (!weatherResponse.ok && !forecastResponse.ok) {
-      throw new Error(`Erorr Status: ${response.status}`);
+      throw new Error(`Erorr fetching data!`);
     }
 
     const weatherData = await weatherResponse.json();
@@ -38,6 +38,9 @@ async function callApi(cityName) {
     displayWeather(weatherData);
   } catch (error) {
     console.log(error);
+    elements.weatherImg.src = './assets/error.png';
+    elements.locationElement.innerText += 'City Not Found';
+    alert('Try Input City Name Again');
   }
 }
 
