@@ -36,9 +36,12 @@ main {
 }
 
 #box1 {
-  width: auto;
+  width: 100;
 }
 
+#city-input {
+  width: 125px;
+}
 /* #wether::before,
 #zone {
   transform: translate(-50%, -50%) scale(1);
@@ -123,6 +126,10 @@ main {
   .date-forecast,
   .avg-deg-forecast {
     font-size: 1.25rem;
+  }
+
+  #city-input {
+    width: auto;
   }
 
   #maps {
