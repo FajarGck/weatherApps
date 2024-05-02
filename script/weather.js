@@ -18,7 +18,7 @@ const elements = {
   sunsetElement: document.getElementById('sunset'),
 };
 const search = document.getElementById('search-btn');
-var cityName = 'Jakarta';
+let cityName = localStorage.getItem('cityName') || 'purwokerto';
 
 async function callApi(cityName) {
   const apiKey = `9d57ea210edcb7e5f92c2958d07deda2`;
@@ -118,7 +118,9 @@ const displayWeather = (weatherData) => {
 
 search.addEventListener('click', (e) => {
   e.preventDefault();
-  cityName = elements.cityInput.value !== '' ? elements.cityInput.value : 'Jakarta';
+  const newCityName = elements.cityInput.value;
+  localStorage.setItem('cityName', newCityName);
+  cityName = newCityName;
   resetUI();
   callApi(cityName);
 });
