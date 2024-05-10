@@ -92,7 +92,7 @@ const displayWeather = (weatherData) => {
   const pressure = weatherData.main.pressure + ' hPa';
   const temMin = Math.round(weatherData.main.temp_min) + '°C';
   const temMax = Math.round(weatherData.main.temp_max) + '°C';
-  const visibility = weatherData.visibility + '   m';
+  const visibility = weatherData.visibility + '   M';
   const sunriseCode = weatherData.sys.sunrise;
   const sunsetCode = weatherData.sys.sunset;
   const sunrise = new Date(sunriseCode * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });

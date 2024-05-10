@@ -1,21 +1,41 @@
+*,
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 main {
   margin: 0;
   padding: 0;
   width: 100%;
   min-height: 100vh;
-  background-color: white;
+  color: white;
+  background-image: url('../assets/bg.jpg');
+  background-position: center;
   transition: transform ease-in-out 0.3s;
 }
 
 #wrapper {
   width: 100%;
   height: 90vhv;
+  padding-top: 3vh;
+}
+
+.nav-link {
+  color: white;
+  width: fit-content;
 }
 
 #collapse {
-  border: 1px solid red;
   margin: 0 auto;
   width: fit-content;
+}
+
+.navbar-toggler {
+  background-color: gray;
+  border: none;
 }
 
 .container-fluid {
@@ -36,30 +56,50 @@ main {
 }
 
 #box1 {
-  width: 100;
+  width: 100%;
+  margin-top: 0.5rem;
+  color: white;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 #city-input {
+  color: white;
   width: 125px;
+  background-color: gray;
 }
-/* #wether::before,
-#zone {
-  transform: translate(-50%, -50%) scale(1);
-  transition: transform ease-in-out 0.3s;
-} */
 
 #box2 {
+  margin-top: 0.5rem;
+  color: white;
   gap: 8px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 #main-info {
-  background-color: white;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+#detail-info {
+  /* border: 1px solid red; */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .card {
   width: 8rem;
   height: 9rem;
+  color: white;
   transition: transform, ease-in-out 0.3s;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .card:hover {
@@ -83,12 +123,20 @@ main {
   width: 100%;
 }
 
+.forecast-description {
+  text-transform: capitalize;
+}
+
 #maps-box {
   margin-top: 0%;
+  width: 100%;
 }
 
 .list-card {
   transition: transform, ease-in-out 0.3s;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .list-card:hover {
@@ -106,12 +154,53 @@ main {
   height: 100px;
 }
 
+.profile-card {
+  padding: 1.5em 0.5em 0.5em;
+  border-radius: 2em;
+  text-align: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transition: transform, ease-in-out 0.3s;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 5px rgb(168, 168, 168);
+}
+
+.title-card {
+  font-weight: 700;
+  font-size: 1.5em;
+}
+
+#pp-img {
+  width: 65%;
+  border-radius: 50%;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.sosmed {
+  list-style: none;
+}
+
 @media only screen and (min-width: 769px) {
-  /* .container-fluid {
-    gap: 6em;
-  } */
+  .nav-link {
+    width: 100%;
+  }
+
+  #container {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  #box1 {
+    margin-top: 0px;
+  }
+
   #box2 {
     gap: 2.5rem;
+    margin-top: 0px;
   }
 
   .card {

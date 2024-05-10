@@ -7,6 +7,16 @@ const elements = {
   dateElement: document.getElementById('date'),
   timeElement: document.getElementById('time'),
   info: document.getElementById('info'),
+  windSpeedElement: document.getElementById('wind-speed'),
+  windDegElement: document.getElementById('wind-deg'),
+  humidityElement: document.getElementById('humidity'),
+  feelElement: document.getElementById('feel'),
+  pressureElement: document.getElementById('pressure'),
+  temMinElement: document.getElementById('temp-min'),
+  temMaxElement: document.getElementById('temp-max'),
+  visibilityElement: document.getElementById('visibility'),
+  sunriseElement: document.getElementById('sunrise'),
+  sunsetElement: document.getElementById('sunset'),
 };
 const search = document.getElementById('search-btn');
 let cityName = localStorage.getItem('cityName') || 'purwokerto';
@@ -56,12 +66,54 @@ const displayWeather = (weatherData) => {
   const currentDate = dd + '-' + mm + '-' + yyyy;
   const currentTime = dayName[day] + ', ' + today.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
+  const directions = [
+    'Utara',
+    'Utara Timur Laut',
+    'Timur Laut',
+    'Timur Laut',
+    'Timur',
+    'Tenggara',
+    'Tenggara',
+    'Selatan Tenggara',
+    'Selatan',
+    'Selatan Barat Daya',
+    'Barat Daya',
+    'Barat Daya',
+    'Barat',
+    'Barat Laut',
+    'Barat Laut',
+    'Utara Barat Laut',
+  ];
+  const windVal = Math.floor(weatherData.wind.deg / 22.5 + 0.5);
+  const windDeg = directions[windVal % 16];
+  const windSpeed = weatherData.wind.speed + ' km/h';
+  const humidity = weatherData.main.humidity + ' %';
+  const feel = Math.round(weatherData.main.feels_like) + '°C';
+  const pressure = weatherData.main.pressure + ' hPa';
+  const temMin = Math.round(weatherData.main.temp_min) + '°C';
+  const temMax = Math.round(weatherData.main.temp_max) + '°C';
+  const visibility = weatherData.visibility + '   M';
+  const sunriseCode = weatherData.sys.sunrise;
+  const sunsetCode = weatherData.sys.sunset;
+  const sunrise = new Date(sunriseCode * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const sunset = new Date(sunsetCode * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
   elements.weatherImg.src = iconUrl;
   elements.temperature.innerText += `${temp}°C`;
   elements.weatherDscr.innerText += capitalizeFirstLetter(description);
   elements.locationElement.innerText += capitalizeFirstLetter(weatherData.name);
   elements.dateElement.innerText += currentTime;
   elements.timeElement.innerText += currentDate;
+  elements.windSpeedElement.innerText += windSpeed;
+  elements.windDegElement.innerText += windDeg;
+  elements.humidityElement.innerText += humidity;
+  elements.feelElement.innerText += feel;
+  elements.pressureElement.innerText += pressure;
+  elements.temMinElement.innerText += temMin;
+  elements.temMaxElement.innerText += temMax;
+  elements.visibilityElement.innerText += visibility;
+  elements.sunriseElement.innerText += sunrise;
+  elements.sunsetElement.innerText += sunset;
 };
 
 const displayForecast = (forecastData) => {
@@ -120,11 +172,11 @@ const displayForecast = (forecastData) => {
   // Loop melalui hasil data dan masukkan ke dalam elemen HTML
   for (const day in avgTemps) {
     const forecastHTML = `
-      <div class="list-card d-flex justify-content-around align-items-center mb-0 shadow-sm gap-3">
+      <div class="list-card d-flex justify-content-around align-items-center mb-1 mx-2 shadow-sm gap-3">
         <h6 class="date-forecast">${day}</h6>
         <div class="d-flex align-items-center">
           <img src="http://openweathermap.org/img/wn/${dailyWeather[day].icons[0]}.png" width="50px" height="50px" alt="weather-icon">
-          <h6 class="avg-deg-forecast mb-0">${avgTemps[day]}°C</h6>
+          <h6 class="avg-deg-forecast mb-0">${Math.round(avgTemps[day])}°C</h6>
         </div>
         <h6 class="forecast-description mb-0">${dailyWeather[day].descriptions[0]}</h6>        
       </div>
