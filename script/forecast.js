@@ -1,3 +1,4 @@
+import { fetchWeatherData } from './api.js';
 const elements = {
   cityInput: document.getElementById('city-input'),
   weatherImg: document.getElementById('weather-img'),
@@ -8,7 +9,6 @@ const elements = {
   timeElement: document.getElementById('time'),
   info: document.getElementById('info'),
   windSpeedElement: document.getElementById('wind-speed'),
-  windDegElement: document.getElementById('wind-deg'),
   humidityElement: document.getElementById('humidity'),
   feelElement: document.getElementById('feel'),
   pressureElement: document.getElementById('pressure'),
@@ -21,29 +21,15 @@ const elements = {
 const search = document.getElementById('search-btn');
 let cityName = localStorage.getItem('cityName') || 'purwokerto';
 
-async function callApi(cityName) {
-  const apiKey = `9d57ea210edcb7e5f92c2958d07deda2`;
-  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
-  const foreCastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}&units=metric`;
-
+async function getWeatherAndForecast(cityName) {
   try {
-    const [weatherResponse, forecastResponse] = await Promise.all([fetch(weatherUrl), fetch(foreCastUrl)]);
-    if (!weatherResponse.ok && !forecastResponse.ok) {
-      throw new Error(`Erorr fetching data!`);
-    }
-
-    const weatherData = await weatherResponse.json();
-    const forecastData = await forecastResponse.json();
-    displayWeather(weatherData);
-    displayForecast(forecastData);
+      const { weatherData, forecastData } = await fetchWeatherData(cityName);
+      displayWeather(weatherData);
+      displayForecast(forecastData);
   } catch (error) {
-    console.log(error);
-    elements.weatherImg.src = './assets/error.png';
-    elements.locationElement.innerText += 'City Not Found';
-    alert('Try Input City Name Again');
+      console.error('Error fetching data:', error);
   }
 }
-
 const displayWeather = (weatherData) => {
   const iconCode = weatherData.weather[0].icon;
   const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@4x.png`;
@@ -66,28 +52,10 @@ const displayWeather = (weatherData) => {
   const currentDate = dd + '-' + mm + '-' + yyyy;
   const currentTime = dayName[day] + ', ' + today.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-  const directions = [
-    'Utara',
-    'Utara Timur Laut',
-    'Timur Laut',
-    'Timur Laut',
-    'Timur',
-    'Tenggara',
-    'Tenggara',
-    'Selatan Tenggara',
-    'Selatan',
-    'Selatan Barat Daya',
-    'Barat Daya',
-    'Barat Daya',
-    'Barat',
-    'Barat Laut',
-    'Barat Laut',
-    'Utara Barat Laut',
-  ];
+  
   const windVal = Math.floor(weatherData.wind.deg / 22.5 + 0.5);
-  const windDeg = directions[windVal % 16];
   const windSpeed = weatherData.wind.speed + ' km/h';
-  const humidity = weatherData.main.humidity + ' %';
+  const humidity = weatherData.main.humidity + '%';
   const feel = Math.round(weatherData.main.feels_like) + '°C';
   const pressure = weatherData.main.pressure + ' hPa';
   const temMin = Math.round(weatherData.main.temp_min) + '°C';
@@ -105,7 +73,6 @@ const displayWeather = (weatherData) => {
   elements.dateElement.innerText += currentTime;
   elements.timeElement.innerText += currentDate;
   elements.windSpeedElement.innerText += windSpeed;
-  elements.windDegElement.innerText += windDeg;
   elements.humidityElement.innerText += humidity;
   elements.feelElement.innerText += feel;
   elements.pressureElement.innerText += pressure;
@@ -191,7 +158,7 @@ search.addEventListener('click', (e) => {
   localStorage.setItem('cityName', newCityName);
   cityName = newCityName;
   resetUI();
-  callApi(cityName);
+  getWeatherAndForecast(cityName);
 });
 
 const resetUI = () => {
@@ -202,4 +169,4 @@ const resetUI = () => {
   }
 };
 
-callApi(cityName);
+getWeatherAndForecast(cityName);

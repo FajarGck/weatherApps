@@ -12,8 +12,10 @@ main {
   width: 100%;
   min-height: 100vh;
   color: white;
-  background-image: url("../assets/bg.jpg");
+  background-image: url("../assets/bg2.jpg");
   background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   transition: transform ease-in-out 0.3s;
 }
 
@@ -86,7 +88,6 @@ main {
 }
 
 #detail-info {
-  /* border: 1px solid red; */
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -107,8 +108,9 @@ main {
   box-shadow: 0px 10px 5px rgb(168, 168, 168);
 }
 
+
 #wind-deg {
-  font-size: small;
+  font-size: smaller;
 }
 
 #location {
@@ -117,6 +119,10 @@ main {
 
 .deg-forecast {
   font-size: 0.5rem;
+}
+
+#humidity {
+  font-size: 1.25rem;
 }
 
 .info {
@@ -188,12 +194,6 @@ main {
     width: 100%;
   }
 
-  #container {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-
   #box1 {
     margin-top: 0px;
   }
@@ -215,6 +215,14 @@ main {
   .date-forecast,
   .avg-deg-forecast {
     font-size: 1.25rem;
+  }
+
+  #wind-deg {
+    font-size: small;
+  }
+
+  #humidity {
+    font-size: 2.5rem
   }
 
   #city-input {

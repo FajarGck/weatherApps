@@ -1,3 +1,4 @@
+import { fetchWeatherData } from './api.js';
 const elements = {
   cityInput: document.getElementById('city-input'),
   weatherImg: document.getElementById('weather-img'),
@@ -20,29 +21,17 @@ const elements = {
 const search = document.getElementById('search-btn');
 let cityName = localStorage.getItem('cityName') || 'purwokerto';
 
-async function callApi(cityName) {
-  const apiKey = `9d57ea210edcb7e5f92c2958d07deda2`;
-  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
-  const foreCastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`;
 
-  try {
-    const weatherResponse = await fetch(weatherUrl);
-    const forecastResponse = await fetch(foreCastUrl);
-    if (!weatherResponse.ok && !forecastResponse.ok) {
-      throw new Error(`Erorr fetching data!`);
+async function getWeatherData(cityName) {
+    try {
+        const { weatherData } = await fetchWeatherData(cityName);
+        displayWeather(weatherData);
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
     }
-
-    const weatherData = await weatherResponse.json();
-    const forecastData = await forecastResponse.json();
-
-    displayWeather(weatherData);
-  } catch (error) {
-    console.log(error);
-    elements.weatherImg.src = './assets/error.png';
-    elements.locationElement.innerText += 'City Not Found';
-    alert('Try Input City Name Again');
-  }
 }
+
+
 
 const displayWeather = (weatherData) => {
   const iconCode = weatherData.weather[0].icon;
@@ -87,7 +76,7 @@ const displayWeather = (weatherData) => {
   const windVal = Math.floor(weatherData.wind.deg / 22.5 + 0.5);
   const windDeg = directions[windVal % 16];
   const windSpeed = weatherData.wind.speed + ' km/h';
-  const humidity = weatherData.main.humidity + ' %';
+  const humidity = weatherData.main.humidity + '%';
   const feel = Math.round(weatherData.main.feels_like) + '°C';
   const pressure = weatherData.main.pressure + ' hPa';
   const temMin = Math.round(weatherData.main.temp_min) + '°C';
@@ -122,7 +111,7 @@ search.addEventListener('click', (e) => {
   localStorage.setItem('cityName', newCityName);
   cityName = newCityName;
   resetUI();
-  callApi(cityName);
+  getWeatherData(cityName);
 });
 
 const resetUI = () => {
@@ -133,4 +122,4 @@ const resetUI = () => {
   }
 };
 
-callApi(cityName);
+getWeatherData(cityName);
