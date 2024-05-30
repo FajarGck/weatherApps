@@ -12,25 +12,21 @@
   </head>
   <body>
     <main>
-      <div id="wrapper">
-        <div id="empty" class="text-center">
-                <p class="fs-1">City Not Found</p>
-        </div>
-        
+      <div id="wrapper">        
         <div id="container" class="row mt-md-2 mb-0 w-auto container-sm m-auto shadow-lg">
           <nav class="navbar navbar-expand-lg">
             <div class="container-fluid d-flex">  
                <div id="form" class="d-flex mb-0 ">
-                <input id="city-input" class="form-control" type="search" placeholder="Search" aria-label="Search" />
-                <button id="search-btn" class="btn btn-outline-info align-self-end" type="button">🔍</button>
-                          </div>
+                 <input id="city-input" class="form-control" type="search" placeholder="Search" aria-label="Search" />
+                 <button id="search-btn" class="btn btn-outline-info align-self-end" type="button">🔍</button>
+                </div>
               <button class="navbar-toggler align-self-center" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon mx-0"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav m-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active text-light" aria-current="page" href="#" style="border-bottom: 1px solid;">TODAY</a>
+                    <a class="nav-link active text-light" aria-current="page" href="./index.html" style="border-bottom: 1px solid;">TODAY</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="./forecast.html">FORECAST</a>
@@ -45,6 +41,9 @@
             <div id="box1" class="d-flex flex-column justify-content-center align-items-center gap-0 shadow-lg">
               <div id="weather" class="d-flex flex-column justify-content-center align-items-center gap-1 mb-4">
                 <img id="weather-img" class="mb-0" src="../assets/error.png" alt="weather-icon" />
+                <div id="empty" class="text-center">
+                  <p class="fs-1">City Not Found</p>
+              </div>
                 <h1 id="temperature" class="fs-1 mb-0"></h1>
                 <h3 id="weather-dscr" class="fs-3 mb-0 mx-2 text-center"></h3>
               </div>
@@ -133,7 +132,7 @@
           <p>&copy;2024 by <span class="designer">Kelompok 8</span></p>
         </div>
         <div class="socialIcons mx-4 my-2 px-6 d-flex gap-2">
-            <a href="https://github.com/FajarGck/weatherApps" target="_blank"><i class="fa-brands fa-github fa-2x text-dark p-2 shadow-lg rounded bg-body-secondary"></i></a>
+            <a href="https://github.com/FajarGck/weatherApps" target="_blank"><i class="fa-brands fa-github fa-2x text-dark p-1 shadow-lg rounded-circle bg-body-secondary"></i></a>
         </div>
       </div>
   </footer>

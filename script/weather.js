@@ -25,9 +25,11 @@ let cityName = localStorage.getItem('cityName') || 'purwokerto';
 async function getWeatherData(cityName) {
     try {
         const { weatherData } = await fetchWeatherData(cityName);
+        document.getElementById('empty').style.display = "none"
         displayWeather(weatherData);
     } catch (error) {
-        console.error('Error fetching weather data:', error);
+      console.error('Error fetching weather data:', error);
+      document.getElementById('empty').style.display = "block"
     }
 }
 
